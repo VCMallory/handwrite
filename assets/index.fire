@@ -173974,7 +173974,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -173986,8 +173986,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        1076.0010000000002,
-        -685.9940000000001,
+        1160.4499999999998,
+        -696.55,
         0,
         0,
         0,
@@ -174043,7 +174043,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -174159,7 +174159,7 @@
     "_dstBlendFactor": 771,
     "_string": "导入数据",
     "_N$string": "导入数据",
-    "_fontSize": 60,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": null,
@@ -174327,9 +174327,9 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 2176.001,
+    "_left": 2330.45,
     "_right": 23.999000000000024,
-    "_top": 1405.9940000000001,
+    "_top": 1416.55,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
