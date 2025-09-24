@@ -220,6 +220,19 @@ cc.Class({
         editboxLheji:cc.EditBox,
         myToggleRB: cc.Toggle,
 
+        ////////////////////////////////
+        //上一步 下一步 提出 保存 v分析
+        shangyibu:{
+            default: [],
+            type: [cc.Integer],
+            tooltip: '98个值'
+        },
+        xiayibu:{
+            default: [],
+            type: [cc.Integer],
+            tooltip: '98个值'
+        },
+         editboxfenxi:cc.EditBox,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -248,6 +261,15 @@ cc.Class({
         this.boolmyToggleRB=false;
         this.editboxRTString=0;
         this.AddNodeList=[];
+
+        //分析
+        this.node49lv=[];
+        this.nn=this.readLinesFromWritable('data/node49lv.txt');
+        for(let i=0;i<this.nn.length;++i){
+            var ss =this.nn[i].split('=');
+            this.node49lv.push(ss[0]);
+            this.node49lv.push(ss[1]);
+        }
      },
 
     start () {
@@ -801,7 +823,12 @@ cc.Class({
     },
 
     okRT(){
-        
+        for(let i=0;i<49;++i){
+            this.shangyibu[i]=this.xiayibu[i]
+        }
+
+
+
         if(this.AddNodeList.length>0&&this.editboxRTString!=""){
             for(let i=0;i<this.AddNodeList.length;++i){
                 for(let j=0;j<this.node49LC0.length;++j){
@@ -823,6 +850,7 @@ cc.Class({
                 if(this.nodeeditvalue0[i]!=0){
                     this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
                     // cc.log('[value1]', this.node49LC0[i].string);
+                    this.xiayibu[i]=this.nodeeditvalue0[i];
                 }
             }
 
@@ -872,6 +900,12 @@ cc.Class({
     },
 
     quedingcenter(){
+
+        for(let i=0;i<49;++i){
+            this.shangyibu[i]=this.xiayibu[i]
+        }
+
+
         console.log('[return]', this.editboxzongfuzhi.string); 
 
          const raw = (this.editboxzongfuzhi?.string || '').trim();
@@ -915,6 +949,7 @@ cc.Class({
                 if(this.nodeeditvalue0[i]!=0){
                     this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
                     // cc.log('[value1]', this.node49LC0[i].string);
+                    this.xiayibu[i]=this.nodeeditvalue0[i];
                 }
             }
 
@@ -941,6 +976,10 @@ cc.Class({
     quedingrightbottom(){
 
         for(let i=0;i<49;++i){
+            this.shangyibu[i]=this.xiayibu[i]
+        }
+
+        for(let i=0;i<49;++i){
             if(this.editboxRB49[i].getComponent(cc.EditBox).string!=""){
                 if(this.boolmyToggleRB){//递减
                     this.nodeeditvalue0[i]-=Number(this.editboxRB49[i].getComponent(cc.EditBox).string);
@@ -955,6 +994,7 @@ cc.Class({
                 if(this.nodeeditvalue0[i]!=0){
                     this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
                     // cc.log('[value1]', this.node49LC0[i].string);
+                    this.xiayibu[i]=this.nodeeditvalue0[i];
                 }
             }
 
@@ -969,6 +1009,23 @@ cc.Class({
             }
             this.editboxLheji.string=sum;
 
+
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+
+            // var str1=[];
+            // for(let i=0;i<this.nodeeditvalue0.length;++i){
+            //     var ss = Number(i+1)+"="+46;
+            //     str1.push(ss);
+            // }
+            // this.writeLinesToWritable('data/node49lv.txt', str1);//['1=0', '2=0', '3=0']
+
     },
 
     qingkongRB(){
@@ -976,6 +1033,128 @@ cc.Class({
             this.editboxRB49[i].getComponent(cc.EditBox).string="";
         }
     },
+
+
+
+    ////////
+    //上一步
+
+
+
+    /////////
+    //下一步
+
+
+    /////////
+    //分析
+    fenxi(){
+
+        for(let i=0;i<49;++i){
+            this.shangyibu[i]=this.nodeeditvalue0[i]
+        }
+        for(let i=0;i<49;++i){
+            this.shangyibu[i+49]=this.nodeeditvalue1[i]
+        }
+        var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+        
+        sum=sum*Number(this.editboxfenxi.string)+sum;
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            if(this.nodeeditvalue0[i]>0){
+                var value0 = Number(this.node49lv[i*2+1])*this.nodeeditvalue0[i];
+                cc.log('[fenxi]', value0);
+                if(value0-sum>0){
+                    var value1 = Math.round((value0-sum)/ Number(this.node49lv[i+1]));
+                    this.nodeeditvalue1[i]=value1;
+                    this.nodeeditvalue0[i]-=value1;
+                }
+            }
+        }
+
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+                if(this.nodeeditvalue0[i]!=0){
+                    this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+                    // cc.log('[value1]', this.node49LC0[i].string);
+                    this.xiayibu[i]=this.nodeeditvalue0[i];
+                }
+            }
+
+        for(let i=0;i<this.nodeeditvalue1.length;++i){
+            if(this.nodeeditvalue1[i]!=0){
+                    this.node49LC1[i].getComponent(cc.EditBox).string=this.nodeeditvalue1[i];
+                    // cc.log('[value1]', this.node49LC0[i].string);
+                    this.xiayibu[i+49]=this.nodeeditvalue1[i];
+
+                   // this.editboxRB49[i].getComponent(cc.EditBox).string=Number(this.nodeeditvalue1[i]);
+                }
+        }
+
+
+            var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+
+
+
+    },
+
+    //////////
+    //提出
+    tichu(){
+        for(let i=0;i<this.nodeeditvalue1.length;++i){
+            if(this.nodeeditvalue1[i]!=0){
+
+                   this.editboxRB49[i].getComponent(cc.EditBox).string=Number(this.nodeeditvalue1[i]);
+                }
+        }
+    },
+
+
+
+    /////////
+    //保存
+
+
+
+
+
+
+
+    ////////////////////
+    //中间的功能
+    //确定
+
+
+
+
+    //清空
+
+
+    //清空数据
+
+
+    //添加
+
+
+    //图片
+
+
+    //统计结果
+
+
     // update (dt) {},
 
     /** 递归查找任意层级子物体（按名字完全匹配） */
@@ -995,5 +1174,66 @@ cc.Class({
         if (node.color) node.color = color;
 
         
-    }
+    },
+
+
+    ///////////////////////////////////////////////
+    //原生读写文件
+    // 是否可用原生文件系统
+isNativeFS () {
+  return cc.sys.isNative && typeof jsb !== 'undefined' && jsb.fileUtils;
+},
+// 拼路径（相对可写目录）
+_join (root, rel) {
+  rel = String(rel || '').replace(/^[\/\\]+/, '');
+  return (root + (root.endsWith('/') ? '' : '/') + rel).replace(/\\/g, '/');
+},
+// 确保目录存在
+_ensureDir (absPath) {
+  const fu = jsb.fileUtils;
+  const dir = absPath.replace(/\/[^\/]*$/, '/');
+  fu.createDirectory(dir);
+},
+
+// —— 逐行读取（相对“可写目录”）——
+readLinesFromWritable (relPath) {
+  if (!this.isNativeFS()) { cc.warn('readLines: 仅原生可用'); return []; }
+  const fu  = jsb.fileUtils;
+  const abs = this._join(fu.getWritablePath(), relPath);
+  if (!fu.isFileExist(abs)) return [];
+  const text = fu.getStringFromFile(abs) || '';
+  // 统一换行后拆分：支持 \r\n / \n / \r
+  return text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+},
+
+// —— 覆盖写入（把数组每一项按一行写入）——
+writeLinesToWritable (relPath, lines) {
+  if (!this.isNativeFS()) { cc.warn('writeLines: 仅原生可用'); return false; }
+  const fu  = jsb.fileUtils;
+  const abs = this._join(fu.getWritablePath(), relPath);
+  this._ensureDir(abs);
+  // 用 \n 作为标准行分隔
+  const body = (lines || []).map(s => String(s ?? '')).join('\n');
+  return fu.writeStringToFile(body, abs);
+},
+
+// —— 追加一行（若文件不存在则创建）——
+appendLineToWritable (relPath, line) {
+  if (!this.isNativeFS()) { cc.warn('appendLine: 仅原生可用'); return false; }
+  const fu  = jsb.fileUtils;
+  const abs = this._join(fu.getWritablePath(), relPath);
+  this._ensureDir(abs);
+
+  let old = '';
+  if (fu.isFileExist(abs)) old = fu.getStringFromFile(abs) || '';
+  const hasContent = old.length > 0;
+  const sep = hasContent ? (/\r\n/.test(old) ? '\r\n' : '\n') : '';
+  const body = hasContent ? (old + sep + String(line ?? '')) : String(line ?? '');
+  return fu.writeStringToFile(body, abs);
+},
+
+
+
+
+
     });
