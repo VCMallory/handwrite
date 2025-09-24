@@ -233,6 +233,21 @@ cc.Class({
             tooltip: '98个值'
         },
          editboxfenxi:cc.EditBox,
+
+
+         ///////
+         //十二生肖
+         shiershengxiao0:{//下面的输入框
+            default: [],
+            type: [cc.Node],
+            tooltip: '中间的输入框对象'
+        },
+        shiershengxiao1:{//上面的输入框
+            default: [],
+            type: [cc.Node],
+            tooltip: '中间的输入框对象'
+        },
+        editboxhejicenter:cc.EditBox,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -269,6 +284,27 @@ cc.Class({
             var ss =this.nn[i].split('=');
             this.node49lv.push(ss[0]);
             this.node49lv.push(ss[1]);
+        }
+
+        //十二生肖
+        this.shiershengxiaostring=[];
+        this.nn1=this.readLinesFromWritable('data/shiershengxiao.txt');
+        for(let i=0;i<this.nn1.length;++i){
+            var ss =this.nn1[i].split('=');
+            this.shiershengxiaostring.push(ss[0]);
+            this.shiershengxiaostring.push(ss[1]);
+        }
+
+        this.shiershengxiaostring1=[];
+        this.nn1=this.readLinesFromWritable('data/shiershengxiaoweizhi.txt');
+        for(let i=0;i<this.nn1.length;++i){
+            var ss =this.nn1[i].split('=');
+            this.shiershengxiaostring.push(ss[0]);
+            var ss1=ss[1].split(',');
+            for(let j=0;j<ss1.length;++j){
+
+            }
+            
         }
      },
 
@@ -1070,7 +1106,7 @@ cc.Class({
                 var value0 = Number(this.node49lv[i*2+1])*this.nodeeditvalue0[i];
                 cc.log('[fenxi]', value0);
                 if(value0-sum>0){
-                    var value1 = Math.round((value0-sum)/ Number(this.node49lv[i+1]));
+                    var value1 = Math.round((value0-sum)/ Number(this.node49lv[i*2+1]));
                     this.nodeeditvalue1[i]=value1;
                     this.nodeeditvalue0[i]-=value1;
                 }
@@ -1136,15 +1172,37 @@ cc.Class({
     ////////////////////
     //中间的功能
     //确定
+    shiershengxiaook(){
 
+        var sum=0;
+        for(let i=0;i<this.shiershengxiao1.length;++i){
+            if(this.shiershengxiao0[i].getComponent(cc.EditBox).string!=""){
+                this.shiershengxiao1[i].getComponent(cc.EditBox).string=this.shiershengxiao0[i].getComponent(cc.EditBox).string;
+                sum+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+            }
+        }
+
+       this.editboxhejicenter.string=sum;
+    },
 
 
 
     //清空
-
+    shiershengxiaoclear(){
+        for(let i=0;i<this.shiershengxiao0.length;++i){
+            this.shiershengxiao0[i].getComponent(cc.EditBox).string="";
+             //this.shiershengxiao1[i].getComponent(cc.EditBox).string="";
+        }
+    },
 
     //清空数据
-
+    shiershengxiaoclear1(){
+        for(let i=0;i<this.shiershengxiao1.length;++i){
+            this.shiershengxiao1[i].getComponent(cc.EditBox).string="";
+             //this.shiershengxiao1[i].getComponent(cc.EditBox).string="";
+        }
+        this.editboxhejicenter.string="";
+    },
 
     //添加
 
@@ -1153,7 +1211,16 @@ cc.Class({
 
 
     //统计结果
-
+    tongjijieguo(){
+        var sum=0;
+        for(let i=0;i<this.shiershengxiao1.length;++i){
+            if(this.shiershengxiao1[i].getComponent(cc.EditBox).string!=""){
+                this.shiershengxiao1[i].getComponent(cc.EditBox).string=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string)*Number(this.shiershengxiaostring[i*2+1]);
+                sum+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+            }
+        }
+        this.editboxhejicenter.string=sum;  
+    },
 
     // update (dt) {},
 
