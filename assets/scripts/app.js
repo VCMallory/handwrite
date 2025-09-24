@@ -183,6 +183,20 @@ cc.Class({
 
          myToggleRT: cc.Toggle,
          editboxRT: cc.EditBox,
+        editboxzongfuzhi:cc.EditBox, 
+        lablezongjine:cc.Label,
+        lablegeshu:cc.Label,
+
+        ///////////////////////////////////////
+        //最右下角的对象
+        editboxRB49:{
+            default: [],
+            type: [cc.Node],
+            tooltip: '最右下角的输入框对象'
+        },
+
+
+        ///////////////////////////////////
           node49LC0:{
             default: [],
             type: [cc.Node],
@@ -203,6 +217,9 @@ cc.Class({
             type: [cc.Integer],
             tooltip: '49个值'
         },
+        editboxLheji:cc.EditBox,
+        myToggleRB: cc.Toggle,
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -213,11 +230,22 @@ cc.Class({
         if (this.myToggleRT) {
             this.myToggleRT.node.on('toggle', this.onToggleChanged, this);
         }
+        if (this.myToggleRB) {
+            this.myToggleRB.node.on('toggle', this.onToggleChanged1, this);
+        }
         if (this.editboxRT) {
             this.editboxRT.node.on('text-changed',      this.onTextChanged, this); // 文本实时变化
             
         }
+        // if(this.editboxzongfuzhi){
+        //     this.editboxzongfuzhi.node.on('editing-return',    this.onEditReturn,  this);
+        // }
+        // PC：系统键盘回车兼容
+        //cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onEditReturn, this);
+
+
         this.boolmyToggleRT=false;
+        this.boolmyToggleRB=false;
         this.editboxRTString=0;
         this.AddNodeList=[];
      },
@@ -226,6 +254,9 @@ cc.Class({
 
     },
 
+     onDestroy () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onEditReturn, this);
+    },
     hongdanbutton(){
         for(let i=0;i<8;++i){
             this.setNodeColor(this.findDeepByName(this.hongdan8RT[i],"Background"),this.coloryellow);
@@ -754,6 +785,16 @@ cc.Class({
             this.boolmyToggleRT=false;
         }
     },
+    onToggleChanged1(toggle, customEventData){
+        cc.log(`toggle: ${toggle.node.name}, checked?`, toggle.isChecked, 'data=', customEventData);
+        // 读取选中
+        if (toggle.isChecked) {
+        // do something...
+            this.boolmyToggleRB=true;
+        }else{
+            this.boolmyToggleRB=false;
+        }
+    },
      onTextChanged (editBox) {
         cc.log('[text-changed]', editBox.string);
         this.editboxRTString=Number(editBox.string);
@@ -765,7 +806,12 @@ cc.Class({
             for(let i=0;i<this.AddNodeList.length;++i){
                 for(let j=0;j<this.node49LC0.length;++j){
                     if(this.AddNodeList[i].name===this.node49LC0[j].name){
-                        this.nodeeditvalue0[j]+=this.editboxRTString;
+                        if(this.boolmyToggleRT){
+                            this.nodeeditvalue0[j]-=this.editboxRTString;
+                        }else{
+                            this.nodeeditvalue0[j]+=this.editboxRTString;
+                        }
+                        
                          cc.log('[value]', this.nodeeditvalue0[j]);
                         break;
                     }
@@ -782,6 +828,16 @@ cc.Class({
 
             this.qingkongRT();
             this.editboxRT.string="";
+
+            var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
         }
     },
 
@@ -805,6 +861,120 @@ cc.Class({
 
         }
         cc.log('[onnum49]', this.AddNodeList.length);
+    },
+
+    ///////////////////////////////////////////////////////////////////////
+    //右下角功能函数
+    onEditReturn (event)
+    {
+        
+         
+    },
+
+    quedingcenter(){
+        console.log('[return]', this.editboxzongfuzhi.string); 
+
+         const raw = (this.editboxzongfuzhi?.string || '').trim();
+         const arr = raw.split(/[,\s，、;；]+/).filter(Boolean);
+        
+        
+        //const unique = [...new Set(arr)];     // 对字符串数组
+         console.log('[arr]', arr[0]); 
+        for(let i=0;i<arr.length;++i){
+            for(let j=0;j<this.qingkongTOPRIGHT49.length;++j){
+                if(arr[i]===this.qingkongTOPRIGHT49[j].name){
+                    this.AddNodeList.push(this.qingkongTOPRIGHT49[j]);
+                    break;
+                }
+            }
+        }
+
+        for(let i=0;i<this.AddNodeList.length;++i){
+             this.setNodeColor(this.findDeepByName(this.AddNodeList[i],"Background"),this.coloryellow);
+        }
+
+
+        //确认个数和总金额
+        this.editboxRTString=Number(this.editboxRT.string);
+        this.lablezongjine.getComponent(cc.Label).string="所选号码总金额:"+this.editboxRTString*this.AddNodeList.length;
+        this.lablegeshu.getComponent(cc.Label).string="所选号码总个数:"+this.AddNodeList.length;
+
+        if(this.AddNodeList.length>0&&this.editboxRTString!=""){
+            for(let i=0;i<this.AddNodeList.length;++i){
+                for(let j=0;j<this.node49LC0.length;++j){
+                    if(this.AddNodeList[i].name===this.node49LC0[j].name){
+                        this.nodeeditvalue0[j]+=this.editboxRTString;
+                         cc.log('[value]', this.nodeeditvalue0[j]);
+                        break;
+                    }
+                }
+            }
+
+            
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                if(this.nodeeditvalue0[i]!=0){
+                    this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+                    // cc.log('[value1]', this.node49LC0[i].string);
+                }
+            }
+
+            //this.qingkongRT();
+            //this.editboxRT.string="";
+
+            var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+        }
+
+
+
+
+
+    },
+
+    quedingrightbottom(){
+
+        for(let i=0;i<49;++i){
+            if(this.editboxRB49[i].getComponent(cc.EditBox).string!=""){
+                if(this.boolmyToggleRB){//递减
+                    this.nodeeditvalue0[i]-=Number(this.editboxRB49[i].getComponent(cc.EditBox).string);
+                }else{
+                    this.nodeeditvalue0[i]+=Number(this.editboxRB49[i].getComponent(cc.EditBox).string);
+                    cc.log('[nodeeditvalue0]', Number(this.editboxRB49[i].getComponent(cc.EditBox).string));
+                }
+            }
+        }
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+                if(this.nodeeditvalue0[i]!=0){
+                    this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+                    // cc.log('[value1]', this.node49LC0[i].string);
+                }
+            }
+
+
+            var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+
+    },
+
+    qingkongRB(){
+        for(let i=0;i<49;++i){
+            this.editboxRB49[i].getComponent(cc.EditBox).string="";
+        }
     },
     // update (dt) {},
 
