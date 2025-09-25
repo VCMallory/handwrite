@@ -27,7 +27,7 @@ cc.Class({
 
         hongdan:cc.Node,
 
-
+        
 
 
         
@@ -219,7 +219,7 @@ cc.Class({
         },
         editboxLheji:cc.EditBox,
         myToggleRB: cc.Toggle,
-
+        edithejiL:cc.EditBox,
         ////////////////////////////////
         //上一步 下一步 提出 保存 v分析
         shangyibu:{
@@ -277,6 +277,247 @@ cc.Class({
         this.editboxRTString=0;
         this.AddNodeList=[];
 
+        //////////////////
+        //判断文件是否存在 不存在创建数据
+        if(!this.fileExistsInWritable('data/node49.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/node49lv.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+"46";
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49lv.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/shiershengxiao.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("鼠=0.27");
+            str.push("牛=0.27");
+            str.push("虎=0.27");
+            str.push("兔=0.27");
+            str.push("龙=0.27");
+            str.push("蛇=0.27");
+            str.push("马=0.27");
+            str.push("羊=0.27");
+            str.push("猴=0.27");
+            str.push("鸡=0.27");
+            str.push("狗=0.27");
+            str.push("猪=0.22");
+
+            str.push("红单=0.13");
+            str.push("红双=0.13");
+            str.push("蓝单=0.13");
+            str.push("蓝双=0.13");
+            str.push("绿单=0.13");
+            str.push("绿双=0.14");
+            str.push("红=0.065");
+            str.push("蓝=0.065");
+            str.push("绿=0.065");
+            str.push("单=0.065");
+            str.push("双=0.065");
+            str.push("大=0.065");
+            str.push("小=0.065");
+
+            this.writeLinesToWritable('data/shiershengxiao.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/shiershengxiaoweizhi.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("鼠=12,24,36,48");
+            str.push("牛=11,23,35,47");
+            str.push("虎=10,22,34,46");
+            str.push("兔=09,21,33,45");
+            str.push("龙=08,20,32,44");
+            str.push("蛇=07,19,31,43");
+            str.push("马=06,18,30,42");
+            str.push("羊=05,17,29,41");
+            str.push("猴=04,16,28,40");
+            str.push("鸡=03,15,27,39");
+            str.push("狗=02,14,26,38");
+            str.push("猪=01,13,25,37,49");
+            this.writeLinesToWritable('data/shiershengxiaoweizhi.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/hongdan.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("01,07,13,19,23,29,35,45");
+          
+            this.writeLinesToWritable('data/hongdan.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/hongshuang.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("02,08,12,18,24,30,34,40,46");
+          
+            this.writeLinesToWritable('data/hongshuang.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/hongda.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("29,30,34,35,40,45,46");
+          
+            this.writeLinesToWritable('data/hongda.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/hongxiao.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("01,02,07,08,12,13,18,19,23,24");
+          
+            this.writeLinesToWritable('data/hongxiao.txt', str);//['1=0', '2=0', '3=0']
+        }
+        
+        if(!this.fileExistsInWritable('data/landan.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("03,09,15,25,31,37,41,47");
+          
+            this.writeLinesToWritable('data/landan.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/lanshuang.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("04,10,14,20,26,36,42,48");
+          
+            this.writeLinesToWritable('data/lanshuang.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/landa.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("25,26,31,36,37,41,42,47,48");
+          
+            this.writeLinesToWritable('data/landa.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/lanxiao.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("03,04,09,10,14,15,20");
+          
+            this.writeLinesToWritable('data/lanxiao.txt', str);//['1=0', '2=0', '3=0']
+        }
+        
+        if(!this.fileExistsInWritable('data/lvdan.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("05,11,17,21,27,33,39,43,49");
+          
+            this.writeLinesToWritable('data/lvdan.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/lvshuang.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("06,16,22,28,32,38,44");
+          
+            this.writeLinesToWritable('data/lvshuang.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/lvda.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("27,28,32,33,38,39,43,44,49");
+          
+            this.writeLinesToWritable('data/lvda.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/lvxiao.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("05,06,11,16,17,21,22");
+          
+            this.writeLinesToWritable('data/lvxiao.txt', str);//['1=0', '2=0', '3=0']
+        }
+
+        if(!this.fileExistsInWritable('data/dan.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("01,03,05,07,09,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49");
+          
+            this.writeLinesToWritable('data/dan.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/shuang.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("02,04,06,08,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48");
+          
+            this.writeLinesToWritable('data/shuang.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/da.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49");
+          
+            this.writeLinesToWritable('data/da.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/xiao.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24");
+          
+            this.writeLinesToWritable('data/xiao.txt', str);//['1=0', '2=0', '3=0']
+        }
+
+        if(!this.fileExistsInWritable('data/hong.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("01,07,13,19,23,29,35,45,02,08,12,18,24,30,34,40,46");
+          
+            this.writeLinesToWritable('data/hong.txt', str);//['1=0', '2=0', '3=0']
+        }
+        if(!this.fileExistsInWritable('data/lan.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("03,09,15,25,31,37,41,47,04,10,14,20,26,36,42,48");
+          
+            this.writeLinesToWritable('data/lan.txt', str);//['1=0', '2=0', '3=0']
+        }
+         if(!this.fileExistsInWritable('data/lv.txt')){
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            str.push("05,11,17,21,27,33,39,43,49,06,16,22,28,32,38,44");
+          
+            this.writeLinesToWritable('data/lv.txt', str);//['1=0', '2=0', '3=0']
+        }
+
+        ///////////
+        //获取初始化数据
+         this.node49valuelist=[];
+        this.list=this.readLinesFromWritable('data/node49.txt');
+        for(let i=0;i<this.list.length;++i){
+            var ss =this.list[i].split('=');
+            this.node49valuelist.push(ss[0]);
+            this.node49valuelist.push(ss[1]);
+        }
+
+
         //分析
         this.node49lv=[];
         this.nn=this.readLinesFromWritable('data/node49lv.txt');
@@ -299,17 +540,197 @@ cc.Class({
         this.nn1=this.readLinesFromWritable('data/shiershengxiaoweizhi.txt');
         for(let i=0;i<this.nn1.length;++i){
             var ss =this.nn1[i].split('=');
-            this.shiershengxiaostring.push(ss[0]);
+            this.shiershengxiaostring1.push(ss[0]);
             var ss1=ss[1].split(',');
             for(let j=0;j<ss1.length;++j){
-
+                this.shiershengxiaostring1.push(ss1[j]);
             }
+            
+        }
+
+        //红单
+        this.hongdanshiershengxiaoString=[];
+        this.nn2=this.readLinesFromWritable('data/hongdan.txt');
+        var s0 = this.nn2[0].split(',');
+        for(let i=0;i<s0.length;++i){
+            this.hongdanshiershengxiaoString.push(s0[i]);
+
+        }
+        //红双
+        this.hongshuangshiershengxiaoString=[];
+        this.nn3=this.readLinesFromWritable('data/hongshuang.txt');
+        var s1 = this.nn3[0].split(',');
+        for(let i=0;i<s1.length;++i){
+            this.hongshuangshiershengxiaoString.push(s1[i]);
+            
+        }
+        //红大
+        this.hongdashiershengxiaoString=[];
+        this.nn4=this.readLinesFromWritable('data/hongda.txt');
+        var s2 = this.nn4[0].split(',');
+        for(let i=0;i<s2.length;++i){
+            this.hongdashiershengxiaoString.push(s2[i]);
+            
+        }
+        //红小
+        this.hongxiaoshiershengxiaoString=[];
+        this.nn5=this.readLinesFromWritable('data/hongxiao.txt');
+        var s3 = this.nn5[0].split(',');
+        for(let i=0;i<s3.length;++i){
+            this.hongxiaoshiershengxiaoString.push(s3[i]);
+            
+        }
+
+
+        //蓝单
+        this.landanshiershengxiaoString=[];
+        this.nn6=this.readLinesFromWritable('data/landan.txt');
+        var s4 = this.nn6[0].split(',');
+        for(let i=0;i<s4.length;++i){
+            this.landanshiershengxiaoString.push(s4[i]);
+
+        }
+        //蓝双
+        this.lanshuangshiershengxiaoString=[];
+        this.nn7=this.readLinesFromWritable('data/lanshuang.txt');
+        var s5 = this.nn7[0].split(',');
+        for(let i=0;i<s5.length;++i){
+            this.lanshuangshiershengxiaoString.push(s5[i]);
+            
+        }
+        //蓝大
+        this.landashiershengxiaoString=[];
+        this.nn8=this.readLinesFromWritable('data/landa.txt');
+        var s6 = this.nn8[0].split(',');
+        for(let i=0;i<s6.length;++i){
+            this.landashiershengxiaoString.push(s6[i]);
+            
+        }
+        //蓝小
+        this.lanxiaoshiershengxiaoString=[];
+        this.nn9=this.readLinesFromWritable('data/lanxiao.txt');
+        var s7 = this.nn9[0].split(',');
+        for(let i=0;i<s7.length;++i){
+            this.lanxiaoshiershengxiaoString.push(s7[i]);
+            
+        }
+
+
+
+        //绿单
+        this.lvdanshiershengxiaoString=[];
+        this.nn10=this.readLinesFromWritable('data/lvdan.txt');
+        var s8 = this.nn10[0].split(',');
+        for(let i=0;i<s8.length;++i){
+            this.lvdanshiershengxiaoString.push(s8[i]);
+
+        }
+        //绿双
+        this.lvshuangshiershengxiaoString=[];
+        this.nn11=this.readLinesFromWritable('data/lvshuang.txt');
+        var s9 = this.nn11[0].split(',');
+        for(let i=0;i<s9.length;++i){
+            this.lvshuangshiershengxiaoString.push(s9[i]);
+            
+        }
+        //绿大
+        this.lvdashiershengxiaoString=[];
+        this.nn12=this.readLinesFromWritable('data/lvda.txt');
+        var s10 = this.nn12[0].split(',');
+        for(let i=0;i<s10.length;++i){
+            this.lvdashiershengxiaoString.push(s10[i]);
+            
+        }
+        //绿小
+        this.lvxiaoshiershengxiaoString=[];
+        this.nn13=this.readLinesFromWritable('data/lvxiao.txt');
+        var s11 = this.nn13[0].split(',');
+        for(let i=0;i<s11.length;++i){
+            this.lvxiaoshiershengxiaoString.push(s11[i]);
+            
+        }
+
+         //单
+        this.danshiershengxiaoString=[];
+        this.nn14=this.readLinesFromWritable('data/dan.txt');
+        var s12 = this.nn14[0].split(',');
+        for(let i=0;i<s12.length;++i){
+            this.danshiershengxiaoString.push(s12[i]);
+
+        }
+        //双
+        this.shuangshiershengxiaoString=[];
+        this.nn15=this.readLinesFromWritable('data/shuang.txt');
+        var s13 = this.nn15[0].split(',');
+        for(let i=0;i<s13.length;++i){
+            this.shuangshiershengxiaoString.push(s13[i]);
+            
+        }
+        //大
+        this.dashiershengxiaoString=[];
+        this.nn16=this.readLinesFromWritable('data/da.txt');
+        var s14 = this.nn16[0].split(',');
+        for(let i=0;i<s14.length;++i){
+            this.dashiershengxiaoString.push(s14[i]);
+            
+        }
+        //小
+        this.xiaoshiershengxiaoString=[];
+        this.nn17=this.readLinesFromWritable('data/xiao.txt');
+        var s15 = this.nn17[0].split(',');
+        for(let i=0;i<s15.length;++i){
+            this.xiaoshiershengxiaoString.push(s15[i]);
+            
+        }
+
+        //红
+        this.hongshiershengxiaoString=[];
+        this.nn18=this.readLinesFromWritable('data/hong.txt');
+        var s16 = this.nn18[0].split(',');
+        for(let i=0;i<s16.length;++i){
+            this.hongshiershengxiaoString.push(s16[i]);
+            
+        }
+        //蓝
+        this.lanshiershengxiaoString=[];
+        this.nn19=this.readLinesFromWritable('data/lan.txt');
+        var s17 = this.nn19[0].split(',');
+        for(let i=0;i<s17.length;++i){
+            this.lanshiershengxiaoString.push(s17[i]);
+            
+        }
+        //绿
+        this.lvshiershengxiaoString=[];
+        this.nn20=this.readLinesFromWritable('data/xiao.txt');
+        var s18 = this.nn20[0].split(',');
+        for(let i=0;i<s18.length;++i){
+            this.lvshiershengxiaoString.push(s18[i]);
             
         }
      },
 
     start () {
 
+        for(let i=0;i<this.node49LC0.length;++i){
+            if(Number(this.node49valuelist[i*2+1])!=0){
+                this.node49LC0[i].getComponent(cc.EditBox).string=Number(this.node49valuelist[i*2+1]);
+            }
+        }
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            this.nodeeditvalue0[i]=Number(this.node49valuelist[i*2+1]);
+        }
+
+        //合计
+        var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
     },
 
      onDestroy () {
@@ -902,6 +1323,14 @@ cc.Class({
                
             }
             this.editboxLheji.string=sum;
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
         }
     },
 
@@ -1001,6 +1430,18 @@ cc.Class({
                
             }
             this.editboxLheji.string=sum;
+
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+
+            //别忘记清空AddNodeList
+            
         }
 
 
@@ -1074,23 +1515,114 @@ cc.Class({
 
     ////////
     //上一步
+    shangyibufun(){
 
+        var pan = false;
+        for(let i=0;i<this.shangyibu.length;++i){
+            if(this.shangyibu[i]!=0){
+                pan = true;
+                break;
+            }
+        }
+
+        if(pan){
+
+
+            for(let i=0;i<this.shangyibu.length;++i){
+            this.nodeeditvalue0[i]=this.shangyibu[i];
+        }
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            if(this.nodeeditvalue0[i]>0){
+                this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+                this.node49LC1[i].getComponent(cc.EditBox).string="";
+            }else{
+                this.node49LC0[i].getComponent(cc.EditBox).string="";
+                this.node49LC1[i].getComponent(cc.EditBox).string="";
+            }
+        }
+
+        var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+
+             //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+
+        }
+
+        
+
+    },
 
 
     /////////
     //下一步
+    xiayibufun(){
+          var pan = false;
+        for(let i=0;i<this.xiayibu.length;++i){
+            if(this.xiayibu[i]!=0){
+                pan = true;
+                break;
+            }
+        }
 
+        if(pan){
+
+            
+            for(let i=0;i<this.xiayibu.length;++i){
+            this.nodeeditvalue0[i]=this.xiayibu[i];
+        }
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            if(this.nodeeditvalue0[i]>0){
+                this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+                this.node49LC1[i].getComponent(cc.EditBox).string="";
+            }
+        }
+
+        var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+
+             //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+
+        }
+    },
 
     /////////
     //分析
     fenxi(){
 
         for(let i=0;i<49;++i){
-            this.shangyibu[i]=this.nodeeditvalue0[i]
+            this.shangyibu[i]=this.xiayibu[i];
         }
-        for(let i=0;i<49;++i){
-            this.shangyibu[i+49]=this.nodeeditvalue1[i]
-        }
+        
         var sum=0;
             for(let i=0;i<this.node49LC0.length;++i){
                 if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
@@ -1126,7 +1658,7 @@ cc.Class({
             if(this.nodeeditvalue1[i]!=0){
                     this.node49LC1[i].getComponent(cc.EditBox).string=this.nodeeditvalue1[i];
                     // cc.log('[value1]', this.node49LC0[i].string);
-                    this.xiayibu[i+49]=this.nodeeditvalue1[i];
+                    //this.xiayibu[i+49]=this.nodeeditvalue1[i];
 
                    // this.editboxRB49[i].getComponent(cc.EditBox).string=Number(this.nodeeditvalue1[i]);
                 }
@@ -1143,7 +1675,17 @@ cc.Class({
             }
             this.editboxLheji.string=sum;
 
+            
 
+             var sum1=0;
+            for(let i=0;i<this.node49LC1.length;++i){
+                if(this.node49LC1[i].getComponent(cc.EditBox).string!=""){
+                     sum1+=Number(this.node49LC1[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.edithejiL.string=sum1;
 
     },
 
@@ -1164,7 +1706,37 @@ cc.Class({
     //保存
 
 
+    /////////
+    //清空数据
+    clearLL(){
 
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            this.nodeeditvalue0[i]=0;
+            this.nodeeditvalue1[i]=0;
+        }
+
+        for(let i=0;i<this.node49LC0.length;++i){
+            this.node49LC0[i].getComponent(cc.EditBox).string="";
+            this.node49LC1[i].getComponent(cc.EditBox).string="";
+        }
+
+        this.editboxLheji.string="";
+
+        for(let i=0;i<this.shangyibu.length;++i){
+            this.shangyibu[i]=0;
+            this.xiayibu[i]=0;
+        }
+
+         //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+        
+    },
 
 
 
@@ -1205,7 +1777,106 @@ cc.Class({
     },
 
     //添加
+    tianjia(){
 
+        for(let i=0;i<this.shiershengxiao1.length;++i){
+            if(this.shiershengxiao1[i].getComponent(cc.EditBox).string!=""){
+                if(i<11){
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+1])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+2])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+3])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+4])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                }else if(i==11){
+                     this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+1])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+2])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+3])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+4])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    this.nodeeditvalue0[Number(this.shiershengxiaostring1[i*5+5])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                }else if(i==12){//红单
+                    for(let j=0;j<this.hongdanshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.hongdanshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==13){//红双
+                    for(let j=0;j<this.hongshuangshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.hongshuangshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==14){//蓝单
+                    for(let j=0;j<this.landanshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.landanshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==15){//蓝双
+                    for(let j=0;j<this.lanshuangshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.lanshuangshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==16){//绿单
+                    for(let j=0;j<this.lvdanshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.lvdanshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==17){//绿双
+                    for(let j=0;j<this.lvshuangshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.lvshuangshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==18){//红
+                    for(let j=0;j<this.hongshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.hongshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==19){//蓝
+                    for(let j=0;j<this.lanshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.lanshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==20){//绿
+                    for(let j=0;j<this.lvshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.lvshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==21){//单
+                    for(let j=0;j<this.danshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.danshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==22){//双
+                    for(let j=0;j<this.shuangshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.shuangshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==23){//大
+                    for(let j=0;j<this.dashiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.dashiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }else if(i==24){//小
+                    for(let j=0;j<this.xiaoshiershengxiaoString.length;++j){
+                        this.nodeeditvalue0[Number(this.xiaoshiershengxiaoString[j])-1]+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+                    }
+                }
+            }
+        }
+
+
+        for(let i=0;i<this.nodeeditvalue0.length;++i){
+            if(this.nodeeditvalue0[i]>0){
+                this.node49LC0[i].getComponent(cc.EditBox).string=this.nodeeditvalue0[i];
+            }
+            
+        }
+
+        //合计
+         var sum=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+            this.editboxLheji.string=sum;
+
+            //写入文件
+            //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+    },
 
     //图片
 
@@ -1299,6 +1970,22 @@ appendLineToWritable (relPath, line) {
   return fu.writeStringToFile(body, abs);
 },
 
+// —— 判断：可写目录里是否存在该文件 —— //
+fileExistsInWritable (relPath) {
+  if (!this.isNativeFS()) { cc.warn('仅原生可用'); return false; }
+  const fu  = jsb.fileUtils;
+  const abs = this._join(fu.getWritablePath(), relPath);
+  return fu.isFileExist(abs);
+},
+
+// —— 判断：exe 同目录（资源根）相对路径是否存在 —— //
+fileExistsInExeRel (relPath) {
+  if (!this.isNativeFS()) { cc.warn('仅原生可用'); return false; }
+  const fu   = jsb.fileUtils;
+  const root = fu.getDefaultResourceRootPath();
+  const abs  = this._join(root, relPath);
+  return fu.isFileExist(abs);
+},
 
 
 
