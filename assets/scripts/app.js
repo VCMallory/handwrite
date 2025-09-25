@@ -248,6 +248,21 @@ cc.Class({
             tooltip: '中间的输入框对象'
         },
         editboxhejicenter:cc.EditBox,
+
+        /////////////
+        //弹框内容
+        nodetankuangContext0:{
+            default: [],
+            type: [cc.Node],
+            tooltip: '弹框0'
+        },
+        nodetankuangContext1:{
+            default: [],
+            type: [cc.Node],
+            tooltip: '弹框1'
+        },
+        tankuang0:cc.Node,
+         tankuang1:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -1704,7 +1719,35 @@ cc.Class({
 
     /////////
     //保存
+    baocunfun(){
+        this.tankuang0.active=true;
 
+        for(let i=0;i<this.node49LC0.length;++i){
+            this.nodetankuangContext0[i].getComponent(cc.EditBox).string=this.node49LC0[i].getComponent(cc.EditBox).string;
+        }
+
+        var sum1=0;
+            for(let i=0;i<this.node49LC0.length;++i){
+                if(this.node49LC0[i].getComponent(cc.EditBox).string!=""){
+                     sum1+=Number(this.node49LC0[i].getComponent(cc.EditBox).string);
+                     //cc.log('[value2]', Number(this.node49LC0[i].getComponent(cc.editBox).string));
+                }
+               
+            }
+           this.nodetankuangContext0[49].getComponent(cc.EditBox).string=sum1;
+
+
+         //写入文件
+            // 覆盖写入多行
+            var str=[];
+            for(let i=0;i<this.nodeeditvalue0.length;++i){
+                var ss = Number(i+1)+"="+this.nodeeditvalue0[i];
+                str.push(ss);
+            }
+            this.writeLinesToWritable('data/node49.txt', str);//['1=0', '2=0', '3=0']
+
+
+    },
 
     /////////
     //清空数据
