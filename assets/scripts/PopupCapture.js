@@ -10,7 +10,7 @@ cc.Class({
     saveRelPath: {
       default: 'captures/popup.png'
     },
-
+    heji:cc.Node,
     // 清晰度缩放（>1 更清晰，代价是更大图）
     scaleFactor: {
       default: 1,
@@ -53,6 +53,7 @@ cc.Class({
   const h = Math.max(1, Math.round(node.height * Math.abs(node.scaleY) * this.scaleFactor));
 
   // —— 保存路径（缺少这个就会报错）——
+  this.saveRelPath="captures/"+this.heji.getComponent(cc.EditBox).string+".png";
   const fu  = jsb.fileUtils;
   const abs = this._join(fu.getWritablePath(), this.saveRelPath);
   this._ensureDir(abs);

@@ -5,7 +5,7 @@ cc.Class({
   properties: {
     // 指向弹框的内容节点（只截这个区域）；不填则截 PopupRoot
     content: cc.Node,
-
+    heji:cc.Node,
     // 保存相对路径（写在可写目录里）
     saveRelPath: {
       default: 'captures/popup1.png'
@@ -53,6 +53,7 @@ cc.Class({
   const h = Math.max(1, Math.round(node.height * Math.abs(node.scaleY) * this.scaleFactor));
 
   // —— 保存路径（缺少这个就会报错）——
+  this.saveRelPath="captures/"+this.heji.getComponent(cc.EditBox).string+".png";
   const fu  = jsb.fileUtils;
   const abs = this._join(fu.getWritablePath(), this.saveRelPath);
   this._ensureDir(abs);

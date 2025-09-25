@@ -263,6 +263,13 @@ cc.Class({
         },
         tankuang0:cc.Node,
          tankuang1:cc.Node,
+
+         ////////////
+         //导入数据功能
+         daorudata:cc.Node,
+         daorudataok:cc.Node,
+         daorudateEdit:cc.EditBox,
+         yincangfujiedian:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -1526,8 +1533,38 @@ cc.Class({
         }
     },
 
+    //////导入数据功能
+    daorutxt(){
 
+        this.daorudata.active=true;
 
+    },
+
+    daoruqueding(){
+
+        var str = this.daorudateEdit.getComponent(cc.EditBox).string;
+        var strshuzu = str.split(',');
+
+        for(let i=0;i<strshuzu.length;++i){
+            var ss = strshuzu[i].split('=');
+            this.editboxRB49[Number(ss[0]-1)].getComponent(cc.EditBox).string=Number(ss[1]);
+        }
+
+        var sum=0;
+        var num=0;
+        for(let i=0;i<this.editboxRB49.length;++i){
+            if(this.editboxRB49[i].getComponent(cc.EditBox).string!=""){
+                num++;
+                sum+=Number(this.editboxRB49[i].getComponent(cc.EditBox).string);
+            }
+        }
+
+        this.lablezongjine.getComponent(cc.Label).string="所选号码总金额:"+sum;
+        this.lablegeshu.getComponent(cc.Label).string="所选号码总个数:"+num;
+         this.daorudata.active=false;
+    },
+
+    ///////////左上角功能
     ////////
     //上一步
     shangyibufun(){
@@ -1786,6 +1823,11 @@ cc.Class({
 
     ////////////////////
     //中间的功能
+    //隐藏或者显示
+    yincang(){
+        this.yincangfujiedian.active=!this.yincangfujiedian.active;
+    },
+
     //确定
     shiershengxiaook(){
 
@@ -1922,7 +1964,27 @@ cc.Class({
     },
 
     //图片
+    tupianshow(){
 
+        for(let i=0;i<this.nodetankuangContext1.length;++i){
+            if(i<25){
+                this.nodetankuangContext1[i].getComponent(cc.EditBox).string=this.shiershengxiao1[i].getComponent(cc.EditBox).string;
+            }
+        }
+
+        var sum=0;
+        for(let i=0;i<this.shiershengxiao1.length;++i){
+            if(this.shiershengxiao1[i].getComponent(cc.EditBox).string!=""){
+                //this.shiershengxiao1[i].getComponent(cc.EditBox).string=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string)*Number(this.shiershengxiaostring[i*2+1]);
+                sum+=Number(this.shiershengxiao1[i].getComponent(cc.EditBox).string);
+            }
+        }
+
+        this.nodetankuangContext1[25].getComponent(cc.EditBox).string=sum;
+
+        this.tankuang1.active=true;
+
+    },
 
     //统计结果
     tongjijieguo(){
